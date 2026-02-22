@@ -1,23 +1,22 @@
 export default function Topbar() {
       return (
           <div style={{
-                height: "60px",
-                      borderBottom: "1px solid #eee",
-                            display: "flex",
-                                  alignItems: "center",
-                                        justifyContent: "space-between",
-                                              padding: "0 20px"
-                                                  }}>
-                                                        <h3>Dashboard</h3>
+                display: "flex",
+                      justifyContent: "space-between",
+                            alignItems: "center",
+                                  borderBottom: "1px solid #1e293b",
+                                        paddingBottom: "10px"
+                                            }}>
+                                                  <h1>Dashboard</h1>
 
-                                                              <button
-                                                                      onClick={()=>{
-                                                                                localStorage.removeItem("auth")
-                                                                                          window.location.href="/"
-                                                                                                  }}
-                                                                                                        >
-                                                                                                                Logout
-                                                                                                                      </button>
-                                                                                                                          </div>
-                                                                                                                            )
-                                                                                                                            }
+                                                        <button
+                                                                onClick={() => {
+                                                                          localStorage.removeItem("auth")
+                                                                                    window.location.href = "/"
+                                                                                            }}
+                                                                                                  >
+                                                                                                          Logout
+                                                                                                                </button>
+                                                                                                                    </div>
+                                                                                                                      )
+                                                                                                                      }

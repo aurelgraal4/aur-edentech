@@ -1,25 +1,17 @@
 export default function Stats() {
       return (
-          <div style={{
-                display:"grid",
-                      gridTemplateColumns:"repeat(3,1fr)",
-                            gap:"20px",
-                                  marginTop:"20px"
-                                      }}>
-                                            <div style={{background:"#f4f4f4",padding:20}}>
-                                                    Users
-                                                            <h2>124</h2>
-                                                                  </div>
+          <div style={{ display: "flex", gap: "20px" }}>
+                
+                      <div style={{ background: "#1e293b", padding: "20px", borderRadius: "10px", width: "150px" }}>
+                              <h3>Users</h3>
+                                      <p>124</p>
+                                            </div>
 
-                                                                        <div style={{background:"#f4f4f4",padding:20}}>
-                                                                                Revenue
-                                                                                        <h2>$2,340</h2>
-                                                                                              </div>
+                                                  <div style={{ background: "#1e293b", padding: "20px", borderRadius: "10px", width: "150px" }}>
+                                                          <h3>Revenue</h3>
+                                                                  <p>$2,430</p>
+                                                                        </div>
 
-                                                                                                    <div style={{background:"#f4f4f4",padding:20}}>
-                                                                                                            Active
-                                                                                                                    <h2>32</h2>
-                                                                                                                          </div>
-                                                                                                                              </div>
-                                                                                                                                )
-                                                                                                                                }
+                                                                            </div>
+                                                                              )
+                                                                              }
