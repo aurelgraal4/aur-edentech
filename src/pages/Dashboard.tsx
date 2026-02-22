@@ -1,42 +1,25 @@
-import { useNavigate } from "react-router-dom"
+import Sidebar from "../components/dashboard/Sidebar"
+import Topbar from "../components/dashboard/Topbar"
+import Stats from "../components/dashboard/Stats"
+import Activity from "../components/dashboard/Activity"
 
 export default function Dashboard() {
-  const navigate = useNavigate()
+  return (
+      <div style={{display:"flex"}}>
 
-    const logout = () => {
-        localStorage.removeItem("session")
-            navigate("/")
-              }
+            <Sidebar />
 
-                return (
-                    <div style={{ display: "flex", height: "100vh", fontFamily: "sans-serif" }}>
-                          
-                                {/* Sidebar */}
-                                      <div style={{
-                                              width: "220px",
-                                                      background: "#111",
-                                                              color: "white",
-                                                                      padding: "20px"
-                                                                            }}>
-                                                                                    <h2>AUR</h2>
+                  <div style={{flex:1}}>
 
-                                                                                            <p>Overview</p>
-                                                                                                    <p>Sequenze</p>
-                                                                                                            <p>Utenti</p>
-                                                                                                                    <p>Logs</p>
-                                                                                                                            <p>Settings</p>
+                          <Topbar />
 
-                                                                                                                                    <button onClick={logout} style={{ marginTop: 20 }}>
-                                                                                                                                              Logout
-                                                                                                                                                      </button>
-                                                                                                                                                            </div>
+                                  <div style={{padding:20}}>
+                                            <Stats />
+                                                      <Activity />
+                                                              </div>
 
-                                                                                                                                                                  {/* Content */}
-                                                                                                                                                                        <div style={{ flex: 1, padding: "40px" }}>
-                                                                                                                                                                                <h1>Dashboard</h1>
-                                                                                                                                                                                        <p>Sistema operativo.</p>
-                                                                                                                                                                                              </div>
+                                                                    </div>
 
-                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                    )
-                                                                                                                                                                                                    }
+                                                                        </div>
+                                                                          )
+                                                                          }
