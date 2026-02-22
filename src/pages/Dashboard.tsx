@@ -1,25 +1,42 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
 
 export default function Dashboard() {
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    localStorage.removeItem('auth')
-    navigate('/')
-  }
+    const logout = () => {
+        localStorage.removeItem("session")
+            navigate("/")
+              }
 
-  return (
-    <div style={{ maxWidth: 800, margin: '60px auto', padding: 20 }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>Dashboard</h1>
-        <button onClick={handleLogout} style={{ padding: '8px 12px' }}>
-          Logout
-        </button>
-      </header>
+                return (
+                    <div style={{ display: "flex", height: "100vh", fontFamily: "sans-serif" }}>
+                          
+                                {/* Sidebar */}
+                                      <div style={{
+                                              width: "220px",
+                                                      background: "#111",
+                                                              color: "white",
+                                                                      padding: "20px"
+                                                                            }}>
+                                                                                    <h2>AUR</h2>
 
-      <main style={{ marginTop: 24 }}>
-        <p>Benvenuto nella dashboard protetta.</p>
-      </main>
-    </div>
-  )
-}
+                                                                                            <p>Overview</p>
+                                                                                                    <p>Sequenze</p>
+                                                                                                            <p>Utenti</p>
+                                                                                                                    <p>Logs</p>
+                                                                                                                            <p>Settings</p>
+
+                                                                                                                                    <button onClick={logout} style={{ marginTop: 20 }}>
+                                                                                                                                              Logout
+                                                                                                                                                      </button>
+                                                                                                                                                            </div>
+
+                                                                                                                                                                  {/* Content */}
+                                                                                                                                                                        <div style={{ flex: 1, padding: "40px" }}>
+                                                                                                                                                                                <h1>Dashboard</h1>
+                                                                                                                                                                                        <p>Sistema operativo.</p>
+                                                                                                                                                                                              </div>
+
+                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                    )
+                                                                                                                                                                                                    }
