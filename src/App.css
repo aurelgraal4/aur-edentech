@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+body {
+    margin: 0;
+      background: #0a0a0a;
+        color: white;
+          font-family: system-ui;
+          }
+
+          h2 {
+            margin-top: 0;
+            }
+
+            ::-webkit-scrollbar {
+              width: 6px;
+              }
+
+              ::-webkit-scrollbar-thumb {
+                background: #222;
+                }

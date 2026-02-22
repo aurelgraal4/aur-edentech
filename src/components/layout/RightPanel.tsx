@@ -1,21 +1,18 @@
 export default function RightPanel() {
       return (
-          <div style={{padding:"20px", borderLeft:"1px solid #1f1f1f"}}>
+          <div
+                style={{
+                        borderLeft: "1px solid #1f1f1f",
+                                padding: 20
+                                      }}
+                                          >
+                                                <h2 style={{ color: "#50c878" }}>Evoluzione</h2>
 
-                <h3>Attività</h3>
+                                                      <p>Badge</p>
 
-                      <ul>
-                              <li>User login</li>
-                                      <li>New account</li>
-                                              <li>Contribution posted</li>
-                                                    </ul>
+                                                            <p>Cancellieri</p>
 
-                                                          <h3 style={{marginTop:30}}>Cancellieri</h3>
-                                                                <p>0</p>
-
-                                                                      <h3 style={{marginTop:30}}>Badge</h3>
-                                                                            <p>Nessuno</p>
-
-                                                                                </div>
-                                                                                  )
-                                                                                  }
+                                                                  <p>Progressione</p>
+                                                                      </div>
+                                                                        );
+                                                                        }
