@@ -1,45 +1,46 @@
 import Sidebar from "../components/dashboard/Sidebar"
 import Topbar from "../components/dashboard/Topbar"
-import Stats from "../components/dashboard/Stats"
-import Activity from "../components/dashboard/Activity"
-
 import Missions from "../components/activity/activity/Missions"
 import Feed from "../components/forum/Feed"
+import Activity from "../components/dashboard/Activity"
 import RightPanel from "../components/layout/RightPanel"
+import Wallet from "../components/economy/Wallet"
 
 export default function Dashboard() {
   return (
       <div
             style={{
-                    display: "grid",
-                            gridTemplateColumns: "220px 1fr 260px",
+                    display: "flex",
+                            background: "#0b0b0b",
                                     minHeight: "100vh",
-                                            background: "#0b0b0b",
-                                                    color: "white"
-                                                          }}
-                                                              >
-                                                                    
-                                                                          {/* SIDEBAR */}
-                                                                                <Sidebar />
+                                            color: "white"
+                                                  }}
+                                                      >
+                                                            {/* Sidebar sinistra */}
+                                                                  <Sidebar />
 
-                                                                                      {/* CENTRO */}
-                                                                                            <div style={{ padding: 30 }}>
+                                                                        {/* Contenuto centrale */}
+                                                                              <div
+                                                                                      style={{
+                                                                                                flex: 1,
+                                                                                                          padding: 30,
+                                                                                                                    maxWidth: 900,
+                                                                                                                              margin: "0 auto"
+                                                                                                                                      }}
+                                                                                                                                            >
+                                                                                                                                                    <Topbar title="EdenTech" />
 
-                                                                                                    <Topbar />
+                                                                                                                                                            <Wallet />
 
-                                                                                                            <Stats />
+                                                                                                                                                                    <Missions />
 
-                                                                                                                    <Activity />
+                                                                                                                                                                            <Feed />
 
-                                                                                                                            <Missions />
+                                                                                                                                                                                    <Activity />
+                                                                                                                                                                                          </div>
 
-                                                                                                                                    <Feed />
-
-                                                                                                                                          </div>
-
-                                                                                                                                                {/* DESTRA */}
-                                                                                                                                                      <RightPanel />
-
-                                                                                                                                                          </div>
-                                                                                                                                                            )
-                                                                                                                                                            }
+                                                                                                                                                                                                {/* Pannello destro */}
+                                                                                                                                                                                                      <RightPanel />
+                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                            )
+                                                                                                                                                                                                            }
