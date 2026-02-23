@@ -1,22 +1,27 @@
 export default function Topbar() {
-      return (
-          <div style={{
-                display: "flex",
-                      justifyContent: "space-between",
-                            alignItems: "center",
-                                  borderBottom: "1px solid #1e293b",
-                                        paddingBottom: "10px"
-                                            }}>
-                                                  <h1>Dashboard</h1>
+        return (
+            <div
+                  style={{
+                          display: "flex",
+                                  justifyContent: "space-between",
+                                          alignItems: "center",
+                                                  marginBottom: 30
+                                                        }}
+                                                            >
+                                                                  <h1 style={{ color: "#00ff9c", fontSize: 28 }}>
+                                                                          EdenTech
+                                                                                </h1>
 
-                                                        <button
-                                                                onClick={() => {
-                                                                          localStorage.removeItem("auth")
-                                                                                    window.location.href = "/"
-                                                                                            }}
-                                                                                                  >
-                                                                                                          Logout
-                                                                                                                </button>
-                                                                                                                    </div>
-                                                                                                                      )
-                                                                                                                      }
+                                                                                      <div
+                                                                                              style={{
+                                                                                                        background: "#111",
+                                                                                                                  padding: "8px 14px",
+                                                                                                                            borderRadius: 8,
+                                                                                                                                      color: "#aaa"
+                                                                                                                                              }}
+                                                                                                                                                    >
+                                                                                                                                                            Sistema Attivo
+                                                                                                                                                                  </div>
+                                                                                                                                                                      </div>
+                                                                                                                                                                        )
+                                                                                                                                                                        }

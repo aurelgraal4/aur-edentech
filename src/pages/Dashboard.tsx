@@ -3,51 +3,43 @@ import Topbar from "../components/dashboard/Topbar"
 import Stats from "../components/dashboard/Stats"
 import Activity from "../components/dashboard/Activity"
 
-import Feed from "../components/forum/Feed"
 import Missions from "../components/activity/activity/Missions"
-
+import Feed from "../components/forum/Feed"
 import RightPanel from "../components/layout/RightPanel"
 
 export default function Dashboard() {
   return (
-      <div style={{ display: "flex", height: "100vh", background: "#0a0a0a", color: "white" }}>
-            
-                  {/* Sidebar */}
-                        <Sidebar />
+      <div
+            style={{
+                    display: "grid",
+                            gridTemplateColumns: "220px 1fr 260px",
+                                    minHeight: "100vh",
+                                            background: "#0b0b0b",
+                                                    color: "white"
+                                                          }}
+                                                              >
+                                                                    
+                                                                          {/* SIDEBAR */}
+                                                                                <Sidebar />
 
-                              {/* Main */}
-                                    <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                                            
-                                                    <Topbar />
+                                                                                      {/* CENTRO */}
+                                                                                            <div style={{ padding: 30 }}>
 
-                                                            <div style={{ display: "flex", flex: 1 }}>
+                                                                                                    <Topbar />
 
-                                                                      {/* Centro */}
-                                                                                <div style={{ flex: 2, padding: 30, overflowY: "auto" }}>
-                                                                                            
-                                                                                                        <h1 style={{ marginBottom: 30 }}>Dashboard</h1>
+                                                                                                            <Stats />
 
-                                                                                                                    <Stats />
+                                                                                                                    <Activity />
 
-                                                                                                                                <Activity />
+                                                                                                                            <Missions />
 
-                                                                                                                                            {/* Forum Evolutivo */}
-                                                                                                                                                        <div style={{ marginTop: 40 }}>
-                                                                                                                                                                      <Feed />
-                                                                                                                                                                                  </div>
+                                                                                                                                    <Feed />
 
-                                                                                                                                                                                              {/* Missioni */}
-                                                                                                                                                                                                          <div style={{ marginTop: 40 }}>
-                                                                                                                                                                                                                        <Missions />
-                                                                                                                                                                                                                                    </div>
+                                                                                                                                          </div>
 
-                                                                                                                                                                                                                                              </div>
+                                                                                                                                                {/* DESTRA */}
+                                                                                                                                                      <RightPanel />
 
-                                                                                                                                                                                                                                                        {/* Destra */}
-                                                                                                                                                                                                                                                                  <RightPanel />
-
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                      )
-                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                          </div>
+                                                                                                                                                            )
+                                                                                                                                                            }
