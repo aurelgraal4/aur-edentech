@@ -1,38 +1,51 @@
-type Mission = {
-      id: number
-        problem: string
-          intention: string
-            context: string
+import type { Mission } from "../../../store/missionStore"
+import { useMissionStore } from "../../../store/missionStore"
+
+type Props = {
+  mission: Mission
+  }
+
+  export default function MissionCard({ mission }: Props) {
+    const completeMission = useMissionStore((state) => state.completeMission)
+
+      const handleComplete = () => {
+          completeMission(mission.id)
             }
 
-            export default function MissionCard({ mission }: { mission: Mission }) {
               return (
-                  <div className="bg-black border border-emerald-700 rounded-xl p-4 mb-4">
-                        <h3 className="text-emerald-400 font-bold mb-2">
-                                Missione #{mission.id}
+                  <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 mb-4">
+                        <h3 className="text-lg font-semibold text-white">
+                                {mission.title}
                                       </h3>
 
-                                            <p className="text-white mb-1">
-                                                    <span className="text-emerald-500">Problema:</span> {mission.problem}
+                                            <p className="text-sm text-zinc-400 mt-2">
+                                                    {mission.description}
                                                           </p>
 
-                                                                <p className="text-white mb-1">
-                                                                        <span className="text-emerald-500">Intenzione:</span> {mission.intention}
-                                                                              </p>
+                                                                <div className="flex justify-between items-center mt-4">
+                                                                        <div className="text-sm text-zinc-300">
+                                                                                  Impatto: {mission.impact}
+                                                                                          </div>
 
-                                                                                    <p className="text-gray-300 text-sm">
-                                                                                            <span className="text-emerald-500">Contesto:</span> {mission.context}
-                                                                                                  </p>
+                                                                                                  <div className="text-yellow-400 font-semibold">
+                                                                                                            +{mission.reward} CANCELLIERE
+                                                                                                                    </div>
+                                                                                                                          </div>
 
-                                                                                                        <div className="flex gap-3 mt-3">
-                                                                                                                <button className="bg-emerald-700 px-3 py-1 rounded">
-                                                                                                                          Presente
-                                                                                                                                  </button>
+                                                                                                                                {!mission.completed && (
+                                                                                                                                        <button
+                                                                                                                                                  onClick={handleComplete}
+                                                                                                                                                            className="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl transition"
+                                                                                                                                                                    >
+                                                                                                                                                                              Completa missione
+                                                                                                                                                                                      </button>
+                                                                                                                                                                                            )}
 
-                                                                                                                                          <button className="bg-yellow-600 px-3 py-1 rounded">
-                                                                                                                                                    Risuona
-                                                                                                                                                            </button>
-                                                                                                                                                                  </div>
-                                                                                                                                                                      </div>
-                                                                                                                                                                        )
-                                                                                                                                                                        }
+                                                                                                                                                                                                  {mission.completed && (
+                                                                                                                                                                                                          <div className="mt-4 text-emerald-400 text-sm">
+                                                                                                                                                                                                                    Missione completata ✓
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                  )}
+                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                        )
+                                                                                                                                                                                                                                        }MissionCard

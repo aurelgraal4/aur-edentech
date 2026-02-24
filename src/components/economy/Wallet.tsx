@@ -1,32 +1,19 @@
-import { useEffect, useState } from "react"
+import { useMissionStore } from "../../store/missionStore"
 
 export default function Wallet() {
-  const [balance, setBalance] = useState(0)
+  const wallet = useMissionStore((s) => s.wallet)
 
-    useEffect(() => {
-        // simulazione saldo utente
-            setBalance(120)
-              }, [])
+    return (
+        <div className="bg-zinc-900 p-5 rounded-xl border border-zinc-800">
+              <h2 className="text-lg mb-1">Wallet</h2>
 
-                return (
-                    <div
-                          style={{
-                                  background: "#111",
-                                          padding: 20,
-                                                  borderRadius: 12,
-                                                          border: "1px solid #333",
-                                                                  marginBottom: 20
-                                                                        }}
-                                                                            >
-                                                                                  <h2>Wallet</h2>
+                    <p className="text-3xl font-bold text-yellow-400">
+                            {wallet} CANCELLIERE
+                                  </p>
 
-                                                                                        <div style={{ fontSize: 28, marginTop: 10 }}>
-                                                                                                {balance} CANCELLIERE
-                                                                                                      </div>
-
-                                                                                                            <p style={{ opacity: 0.7, marginTop: 10 }}>
-                                                                                                                    Guadagnati completando missioni validate dalla community.
-                                                                                                                          </p>
-                                                                                                                              </div>
-                                                                                                                                )
-                                                                                                                                }
+                                        <p className="text-sm text-zinc-400 mt-2">
+                                                Guadagnati completando missioni validate dalla community.
+                                                      </p>
+                                                          </div>
+                                                            )
+                                                            }
