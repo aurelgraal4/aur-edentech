@@ -1,5 +1,4 @@
-import type { Mission } from "../../../store/missionStore"
-import { useMissionStore } from "../../../store/missionStore"
+import { Mission, useMissionStore } from "../../../store/missionStore"
 
 type Props = {
   mission: Mission
@@ -8,44 +7,41 @@ type Props = {
   export default function MissionCard({ mission }: Props) {
     const completeMission = useMissionStore((state) => state.completeMission)
 
-      const handleComplete = () => {
-          completeMission(mission.id)
-            }
+      const isCompleted = mission.status === "completed"
+        const isAvailable = mission.status === "available"
 
-              return (
-                  <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 mb-4">
-                        <h3 className="text-lg font-semibold text-white">
-                                {mission.title}
-                                      </h3>
+          return (
+              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 mb-4">
+                    <h3 className="text-lg font-semibold text-white mb-1">
+                            {mission.title}
+                                  </h3>
 
-                                            <p className="text-sm text-zinc-400 mt-2">
-                                                    {mission.description}
-                                                          </p>
+                                        <p className="text-sm text-zinc-400 mb-3">
+                                                {mission.description}
+                                                      </p>
 
-                                                                <div className="flex justify-between items-center mt-4">
-                                                                        <div className="text-sm text-zinc-300">
-                                                                                  Impatto: {mission.impact}
-                                                                                          </div>
+                                                            <div className="text-sm text-zinc-500 mb-2">
+                                                                    Impatto: {mission.impact}
+                                                                          </div>
 
-                                                                                                  <div className="text-yellow-400 font-semibold">
-                                                                                                            +{mission.reward} CANCELLIERE
-                                                                                                                    </div>
-                                                                                                                          </div>
+                                                                                <div className="text-emerald-400 font-semibold mb-3">
+                                                                                        +{mission.reward} CANCELLlERE
+                                                                                              </div>
 
-                                                                                                                                {!mission.completed && (
-                                                                                                                                        <button
-                                                                                                                                                  onClick={handleComplete}
-                                                                                                                                                            className="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl transition"
-                                                                                                                                                                    >
-                                                                                                                                                                              Completa missione
-                                                                                                                                                                                      </button>
-                                                                                                                                                                                            )}
+                                                                                                    {isCompleted && (
+                                                                                                            <div className="text-emerald-400 text-sm">
+                                                                                                                      Missione completata ✓
+                                                                                                                              </div>
+                                                                                                                                    )}
 
-                                                                                                                                                                                                  {mission.completed && (
-                                                                                                                                                                                                          <div className="mt-4 text-emerald-400 text-sm">
-                                                                                                                                                                                                                    Missione completata ✓
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                  )}
-                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                        )
-                                                                                                                                                                                                                                        }MissionCard
+                                                                                                                                          {isAvailable && (
+                                                                                                                                                  <button
+                                                                                                                                                            onClick={() => completeMission(mission.id)}
+                                                                                                                                                                      className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-4 py-2 rounded-lg transition"
+                                                                                                                                                                              >
+                                                                                                                                                                                        Completa missione
+                                                                                                                                                                                                </button>
+                                                                                                                                                                                                      )}
+                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                            )
+                                                                                                                                                                                                            }
