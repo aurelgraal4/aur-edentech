@@ -1,28 +1,46 @@
 import React from "react"
 import Card from "../shared/components/ui/Card"
 import { useUser } from "../app/providers/UserProvider"
-import { getActiveMissions } from "../core/missions"
+import usePlatform, { PlatformState as PlatformStateType } from "../hooks/usePlatform"
+import type { Activity } from "../core/activityEngine"
+import type { LeaderboardEntry } from "../core/leaderboard"
+import type { Transaction } from "../core/wallet"
 import { getBalance } from "../core/wallet"
 import { getLevelFromReputation } from "../core/reputation"
-import { getGlobalFeed, getUserFeed } from "../core/activityEngine"
+import { getGlobalFeed } from "../core/activityEngine"
 import ActivityFeed from "../features/activity/ActivityFeed"
 import { getLeaderboard } from "../core/leaderboard"
-import { getPlatformStats } from "../core/platformStats"
 import { getTransactionHistory, getBalance as getUserBalance } from "../core/wallet"
 import { getPower, getLevel } from "../core/tokenProtocol"
 
 export default function Dashboard() {
       const { user } = useUser()
-      const missions = getActiveMissions()
+      const { state: pState } = usePlatform()
+      type MissionShape = { missionId: string; completedBy: string[]; lastCompleted?: number }
+      const missions: MissionShape[] = Object.keys(pState.missions.byId || {}).map((k) => pState.missions.byId[k])
       const balance = getBalance()
 
       const levelInfo = user ? getLevelFromReputation(user.reputation) : null
-      const activities = getGlobalFeed().slice(0, 6)
-      const leaderboard = getLeaderboard().slice(0, 3)
-      const stats = getPlatformStats()
+      const activities: Activity[] = getGlobalFeed().slice(0, 6)
+      const leaderboard: LeaderboardEntry[] = getLeaderboard().slice(0, 3)
+      const stats: {
+            totalUsers: number
+            missionsCompleted: number
+            tokensDistributed: number
+            proposalsCreated: number
+            activeSessions: number
+            totalReputation: number
+      } = {
+            totalUsers: Object.keys(pState.users || {}).length,
+            missionsCompleted: Object.values(pState.missions.byId || {}).reduce((s, m) => s + (m.completedBy?.length || 0), 0),
+            tokensDistributed: pState.economy?.totalDistributed || 0,
+            proposalsCreated: Object.keys(pState.governance.proposals || {}).length,
+            activeSessions: Object.keys(pState.activeSessions || {}).length,
+            totalReputation: Object.values(pState.reputation || {}).reduce((s, v) => s + (Number(v) || 0), 0),
+      }
       const myRank = user ? getLeaderboard().findIndex((l) => l.id === user.id) + 1 : null
       const myBalance = user ? getUserBalance(user.id) : 0
-      const tx = user ? getTransactionHistory(user.id) : []
+      const tx: Transaction[] = user ? getTransactionHistory(user.id) : []
       const today = Date.now() - 1000 * 60 * 60 * 24
       const tokensToday = tx.filter((t) => t.type === "earn" && new Date(t.timestamp).getTime() >= today).reduce((s, t) => s + t.amount, 0)
       const week = Date.now() - 1000 * 60 * 60 * 24 * 7
@@ -97,6 +115,8 @@ export default function Dashboard() {
                                     <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
                                     <Card title="Platform Stats">
                                           <p>Utenti registrati: {stats.totalUsers}</p>
+                                          <p>Active sessions: {stats.activeSessions}</p>
+                                          <p>Totale reputazione: {stats.totalReputation}</p>
                                           <p>Missioni completate: {stats.missionsCompleted}</p>
                                           <p>Tokens distribuiti: {stats.tokensDistributed}</p>
                                           <p>Proposte create: {stats.proposalsCreated}</p>
