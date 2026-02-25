@@ -8,13 +8,13 @@ export default function Governance() {
   const [proposals, setProposals] = useState<Proposal[]>(() => listProposals())
   const [title, setTitle] = useState("")
   const [desc, setDesc] = useState("")
-  const { user, updateReputation } = useUser()
+  const { user, addReputation } = useUser()
 
   function handleVote(id: string, support: boolean) {
     voteProposal(id, support)
     setProposals(listProposals())
     const delta = triggerReputationEvent("VOTE_CAST")
-    if (user) updateReputation(delta)
+    if (user) addReputation(delta)
     logActivity("VOTE_CAST", `${user?.username ?? "anonymous"} voted on ${id}`)
   }
 
@@ -29,7 +29,7 @@ export default function Governance() {
     const p = createProposal(title, desc)
     setProposals(listProposals())
     const delta = triggerReputationEvent("PROPOSAL_CREATED")
-    if (user) updateReputation(delta)
+    if (user) addReputation(delta)
     logActivity("PROPOSAL_CREATED", `${user?.username ?? "anonymous"} created proposal ${p.id}`)
     setTitle("")
     setDesc("")

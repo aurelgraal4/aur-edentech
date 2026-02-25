@@ -1,14 +1,16 @@
-import { earnTokens as walletEarn, spendTokens as walletSpend, getBalance as walletBalance, getTransactionHistory as walletHistory } from "./wallet"
+import * as TP from "./tokenProtocol"
+import { getTransactionHistory as walletHistory, getBalance as walletBalance } from "./wallet"
 
 export function earnTokens(userId: string, amount: number, reason?: string) {
-  return walletEarn(userId, amount, reason)
+  return TP.earn(userId, amount, reason)
 }
 
 export function spendTokens(userId: string, amount: number, reason?: string) {
-  return walletSpend(userId, amount, reason)
+  return TP.spend(userId, amount, reason)
 }
 
 export function getUserBalance(userId: string) {
+  // wallet balance is authoritative
   return walletBalance(userId)
 }
 

@@ -65,35 +65,4 @@ export default function ProfileEvolution({ profile }: Props) {
     </Card>
   )
 }
-import React from "react"
-import Card from "../../shared/components/ui/Card"
 
-type Props = { profile: any }
-
-export default function ProfileEvolution({ profile }: Props) {
-  const progress = profile?.level_progress ?? 0
-  const total = profile?.cancellieri_total ?? 0
-  const posts = profile?.forum_posts_count ?? 0
-  const steps = profile?.journey_steps_count ?? 0
-  const badges = profile?.badges || []
-
-  return (
-    <Card title="Evolution">
-      <div>
-        <div style={{ height: 10, background: "#111", borderRadius: 6, margin: "8px 0" }}>
-          <div style={{ width: `${Math.round(progress*100)}%`, height: 10, background: "var(--aur-green)", borderRadius: 6 }} />
-        </div>
-        <div>Progress towards next level: {Math.round(progress*100)}%</div>
-        <div style={{ marginTop: 8 }}>Cancellieri total: {total}</div>
-        <div>Forum posts: {posts}</div>
-        <div>Journey steps: {steps}</div>
-        <div style={{ marginTop: 8 }}>
-          <b>Badges</b>
-          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-            {badges.map((b:any) => <div key={b.id} title={b.description} style={{ padding: 6, borderRadius: 6 }}>{b.name}</div>)}
-          </div>
-        </div>
-      </div>
-    </Card>
-  )
-}

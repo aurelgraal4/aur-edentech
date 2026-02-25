@@ -35,6 +35,10 @@ export function logActivity(type: string, data: any, user?: { id: string; userna
   const actor = user ?? { id: "anon", username: "anonymous" }
   const a: Activity = { id: makeId(), type, user: actor, timestamp: new Date().toISOString(), data }
   activities.unshift(a)
+  // notify subscribers
+  try {
+    subscribers.forEach((s) => s(a))
+  } catch {}
   // update user counters and possibly assign badges
   if (user && user.id && usersMap) {
     const u = ensureUser(user)
@@ -82,7 +86,21 @@ export function assignBadge(userId: string, badgeId: string) {
   u.badges = Array.from(new Set([...(u.badges || []), badgeId]))
   const badgeLog: Activity = { id: makeId(), type: "BADGE_EARNED", user: { id: u.id, username: u.username }, timestamp: new Date().toISOString(), data: { badgeId } }
   activities.unshift(badgeLog)
+  try {
+    subscribers.forEach((s) => s(badgeLog))
+  } catch {}
   return badgeLog
+}
+
+// subscribers for real-time updates
+const subscribers: Array<(a: Activity) => void> = []
+
+export function subscribeActivities(cb: (a: Activity) => void) {
+  subscribers.push(cb)
+  return () => {
+    const idx = subscribers.indexOf(cb)
+    if (idx >= 0) subscribers.splice(idx, 1)
+  }
 }
 
 export function getUserStats(userId: string) {

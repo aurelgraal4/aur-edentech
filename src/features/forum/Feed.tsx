@@ -22,7 +22,7 @@ export default function Feed() {
   const [intention, setIntention] = useState("")
   const [context, setContext] = useState("")
   const [file, setFile] = useState<File | null>(null)
-  const { user, updateReputation } = useUser()
+  const { user, addReputation } = useUser()
 
   async function loadPosts() {
     const { data } = await supabase.from("missions").select("*").order("id", { ascending: false })
@@ -60,7 +60,7 @@ export default function Feed() {
 
     // reward reputation for creating a post (UI-only)
     const delta = triggerReputationEvent("POST_CREATED")
-    if (user) updateReputation(delta)
+    if (user) addReputation(delta)
     const postId = inserted?.id ?? null
     logActivity("POST_CREATED", { postId, problem, intention }, user ? { id: user.id, username: user.username } : undefined)
 

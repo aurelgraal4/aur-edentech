@@ -7,6 +7,7 @@ import { listBadges, getBadgeById } from "../core/badges"
 import { getWeeklyScore, getDailyScore } from "../core/activityScore"
 import { calculateUserScore } from "../core/reputation"
 import { getLeaderboard } from "../core/leaderboard"
+import ActivityFeed from "../features/activity/ActivityFeed"
 
 export default function Profile() {
   const { user } = useUser()
@@ -61,11 +62,7 @@ export default function Profile() {
 
         <div>
           <Card title="Recent Activity">
-            <ul>
-              {feed.map((f) => (
-                <li key={f.id}>{f.timestamp.split("T")[0]} — {f.type} — {JSON.stringify(f.data)}</li>
-              ))}
-            </ul>
+            <ActivityFeed max={10} userId={user.id} />
           </Card>
 
           <Card title="Transactions" style={{ marginTop: 12 }}>

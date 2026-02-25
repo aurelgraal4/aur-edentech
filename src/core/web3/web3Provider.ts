@@ -1,4 +1,3 @@
-import type { ProviderMessage, ProviderInfo } from "@walletconnect/types"
 import { BASE_MAINNET } from "./network"
 
 declare global {

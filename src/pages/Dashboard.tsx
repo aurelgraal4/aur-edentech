@@ -5,9 +5,11 @@ import { getActiveMissions } from "../core/missions"
 import { getBalance } from "../core/wallet"
 import { getLevelFromReputation } from "../core/reputation"
 import { getGlobalFeed, getUserFeed } from "../core/activityEngine"
+import ActivityFeed from "../features/activity/ActivityFeed"
 import { getLeaderboard } from "../core/leaderboard"
 import { getPlatformStats } from "../core/platformStats"
 import { getTransactionHistory, getBalance as getUserBalance } from "../core/wallet"
+import { getPower, getLevel } from "../core/tokenProtocol"
 
 export default function Dashboard() {
       const { user } = useUser()
@@ -26,7 +28,30 @@ export default function Dashboard() {
       const week = Date.now() - 1000 * 60 * 60 * 24 * 7
       const tokensWeek = tx.filter((t) => t.type === "earn" && new Date(t.timestamp).getTime() >= week).reduce((s, t) => s + t.amount, 0)
 
-      return (
+      const [power, level] = user ? [null, null] : [null, null]
+
+                  const [powerVal, setPowerVal] = React.useState<number | null>(null)
+                  const [levelVal, setLevelVal] = React.useState<string | null>(null)
+
+                  React.useEffect(() => {
+                        let mounted = true
+                        if (user) {
+                              (async () => {
+                                    try {
+                                          const p = await getPower(user.id)
+                                          const l = await getLevel(user.id)
+                                          if (!mounted) return
+                                          setPowerVal(p)
+                                          setLevelVal(l)
+                                    } catch (e) {
+                                          console.error(e)
+                                    }
+                              })()
+                        }
+                        return () => { mounted = false }
+                  }, [user])
+
+                  return (
             <div>
                   <h1>Dashboard</h1>
 
@@ -43,6 +68,7 @@ export default function Dashboard() {
                                                 </div>
                                                 <p>Reputazione: {user.reputation}</p>
                                                 <p>Tokens: {user.tokens} • Balance: {myBalance}</p>
+                                                <p>Power: {powerVal ?? "-"} • Level: {levelVal ?? "-"}</p>
                                                 <p>Completed missions: {user.completedMissions.length}</p>
                                           </div>
                                     )}
@@ -62,11 +88,9 @@ export default function Dashboard() {
                                     <p>Active missions: {missions.length}</p>
                                     <div style={{ marginTop: 8 }}>
                                           <h4>Recent Activity</h4>
-                                          <ul>
-                                                {activities.map((a) => (
-                                                      <li key={a.id} style={{ fontSize: 13 }}>{a.timestamp.split("T")[0]} — {a.type} — {JSON.stringify(a.data)}</li>
-                                                ))}
-                                          </ul>
+                                          <div style={{ marginTop: 8 }}>
+                                                <ActivityFeed max={6} />
+                                          </div>
                                     </div>
                               </Card>
 

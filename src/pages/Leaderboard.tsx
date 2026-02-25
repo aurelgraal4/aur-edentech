@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { getLeaderboard } from "../core/leaderboard"
 import { getAllScores } from "../core/activityScore"
 import Card from "../shared/components/ui/Card"
+import ActivityFeed from "../features/activity/ActivityFeed"
 
 export default function Leaderboard() {
   const [tab, setTab] = useState<"reputation" | "missions" | "earners">("reputation")
@@ -46,6 +47,11 @@ export default function Leaderboard() {
           </tbody>
         </table>
       </Card>
+      <div style={{ marginTop: 12 }}>
+        <Card title="Recent Activity">
+          <ActivityFeed max={6} />
+        </Card>
+      </div>
     </div>
   )
 }

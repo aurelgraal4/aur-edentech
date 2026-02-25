@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabase'
+import gateway from '../core/gateway/platformGateway'
 
 export default function Login() {
   const [sequence, setSequence] = useState('')
@@ -25,7 +26,10 @@ export default function Login() {
 
       if (data === true) {
         localStorage.setItem('auth', 'true')
-        navigate('/dashboard')
+        try {
+          // notify platform gateway to open internal platform
+          await gateway.handleLoginSuccess({ id: sequence, sequenceHash: sequence })
+        } catch {}
       } else {
         setError('Sequenza non valida')
       }

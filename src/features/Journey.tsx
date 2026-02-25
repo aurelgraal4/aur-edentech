@@ -2,12 +2,11 @@ import React from "react"
 import { getActiveMissions, completeMission } from "../core/missions"
 import { useUser } from "../app/providers/UserProvider"
 import { triggerReputationEvent } from "../core/reputationEvents"
-import { receiveTokens } from "../core/wallet"
 import { logActivity } from "../core/activity"
 
 export default function Journey() {
   const missions = getActiveMissions()
-  const { user, updateReputation, addTokens } = useUser()
+  const { user, addReputation, addTokens } = useUser()
 
   function handleComplete(id: string) {
     // delegate to user context to handle tokens/reputation and logging
